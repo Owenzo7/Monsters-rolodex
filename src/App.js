@@ -4,13 +4,12 @@ import './App.css';
 
 class App extends Component {
   
-  constructor (){
+  constructor(){
+    super()
 
-    super();
 
     this.state = {
-
-      name:'Lee',
+      name: "Jobs"
     }
   }
 
@@ -22,7 +21,9 @@ class App extends Component {
           <p>
             Hi {this.state.name}.
           </p>
-          <button>
+          <button onClick={() => {
+            this.setState({name:'James'})
+          }}>
           Change Name.
           </button>
         </header>
