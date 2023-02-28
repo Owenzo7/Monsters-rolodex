@@ -11,25 +11,22 @@ class App extends Component {
   }
 
   componentDidMount(){
-    fetch("https://jsonplaceholder.typicode.com/users")
+    fetch("https://dummyjson.com/quotes")
     .then(response => response.json())
-    .then(users => this.setState(() => {
-
-      return  {monsters:users}
-    }, () => {console.log(this.state)}))
+    .then(datas => this.setState({monsters:datas}))
   }
 
   render() {
-    return (
-      <div className="App">
-        {this.state.monsters.map((monster) =>{
+    return <div>
+    {this.state.monsters.map((data) => {
 
-          return (
-            <h1 key={monster.id}>{monster.name}</h1>
-          )
-        })}
-      </div>
-    );
+      return (
+        <h1 key={data.id}>{data.quote}</h1>
+      )
+      
+     
+    })}
+    </div>;
   }
 }
 
