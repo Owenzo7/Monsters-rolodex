@@ -4,10 +4,10 @@ export default class searchBox extends Component {
   render() {
     return (
       <input
-          // className="search-box"
+          className={this.props.className}
           type="search"
-          placeholder="search monsters"
-          onChange={onChangeHandler}
+          placeholder={this.props.placeholder}
+          onChange={this.props.onChangeHandler}
         />
     )
   }
