@@ -1,24 +1,32 @@
-import { Component } from "react";
+import { useState } from "react";
 import "./App.css";
 import Cardlist from "./components/Cardlist/card-list.component";
 import SearchBox from "./components/Searchbox/search-box.component";
 
-const App = () =>{
+const App = () => {
+  const [searchField, setsearchField] = useState("");
 
+  console.log({searchField})
+  const onSearchChange = (event) => {
+    console.log(event.target.value);
+
+    const searchFieldString = event.target.value.toLocaleLowerCase();
+    setsearchField(searchFieldString);
+
+  };
 
   return (
-    
     <div className="App">
-  <h1 className="app-title">Monsters Rolodex</h1>
-    {/* <SearchBox */}
-      {/* onChangeHandler={onSearchChange} */}
-      {/* placeholder="search monsters" */}
-      {/* className="monsters-search-box" */}
-    {/* /> */}
-    {/* <Cardlist monsters={filteredMonsters} /> */}
-  </div>)
-}
-
+      <h1 className="app-title">Monsters Rolodex</h1>
+      <SearchBox
+        onChangeHandler={onSearchChange}
+        placeholder="search monsters"
+        className="monsters-search-box"
+      />
+      {/* <Cardlist monsters={filteredMonsters} /> */}
+    </div>
+  );
+};
 
 // class App extends Component {
 //   constructor() {
@@ -60,7 +68,7 @@ const App = () =>{
 //     return (
 //       <div className="App">
 //       <h1 className="app-title">Monsters Rolodex</h1>
-        
+
 //       </div>
 //     );
 //   }
