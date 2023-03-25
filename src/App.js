@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import { useState, useEffect } from "react";
 import "./App.css";
 import Cardlist from "./components/Cardlist/card-list.component";
@@ -6,10 +7,24 @@ import SearchBox from "./components/Searchbox/search-box.component";
 const App = () => {
   const [searchField, setsearchField] = useState("");
   const [monsters, setmonsters] = useState([]);
+  const [filteredMonsters, setfilteredMonsters] = useState(monsters)
 
-  fetch("https://jsonplaceholder.typicode.com/users")
-    .then((response) => response.json())
-    .then((users) => setmonsters(users));
+  console.log(render);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((users) => setmonsters(users));
+  }, []);
+
+  useEffect(() => {
+    const newfilteredMonsters = monsters.filter((monster) => {
+      return monster.name.toLocaleLowerCase().includes(searchField);
+    });
+  
+    setfilteredMonsters(newfilteredMonsters)
+
+  }, [monsters, searchField])
 
   console.log({ searchField });
   const onSearchChange = (event) => {
@@ -19,10 +34,7 @@ const App = () => {
     setsearchField(searchFieldString);
   };
 
-  const filteredMonsters = monsters.filter((monster) => {
-    return monster.name.toLocaleLowerCase().includes(searchField);
-  });
-
+ 
   return (
     <div className="App">
       <h1 className="app-title">Monsters Rolodex</h1>
